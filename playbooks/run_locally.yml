@@ -1,0 +1,45 @@
+---
+
+- hosts: localhost
+  become: yes # ovo znaci da radi kao root user (shell ->  sudo su)
+  gather_facts: no
+
+  # taskovi koji se inkluduju ne smeju da imaju host...
+  # mogu samo da imaju - name...
+
+  vars_prompt:
+
+    - name: username
+      prompt: "Please enter your username"
+      private: no
+
+    - name: password
+      prompt: "Please enter your password"
+      private: yes
+      confirm: yes
+
+  tasks:
+
+    - name: Get date
+      command: date
+      register: date
+
+    - name: Print date and variablse
+      when:
+        - " '04:11' in date.stdout "
+        - date is defined
+        # na ovaj nacin moze da se povezuju uslovi, svi mora da su zadovoljeni da bi se name: izvrsio
+      debug:
+        msg:
+          - "{{ date.stdout }}"
+          - "username:= {{ username }} : password:= {{ password }}"
+
+    - name: Wait for folder to be created
+      wait_for:
+        path: /home/vstevanic/Desktop/proba
+        # putanja gde hocemo da nam kreira nov direktorijum a posledni /newDirectory je naziv novog direktorijuma
+
+    - include: include1.yml folderName='newFolder'
+    #- include: include2.yml radi include ( ne moze da instalira httpd iz nekog razloga )
+
+# svaki yml file se zavrsava sa ... ali ne mora ( to je opciono )

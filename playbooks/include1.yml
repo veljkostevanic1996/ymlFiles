@@ -1,0 +1,7 @@
+---
+
+- name: create file for include1
+  file:
+    path: "/home/vstevanic/Desktop/{{ folderName }}"
+    state: directory
+    mode: '0755'
