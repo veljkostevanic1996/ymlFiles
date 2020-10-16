@@ -1,0 +1,8 @@
+---
+
+- name: copy local file to remote(local) server
+  copy:
+    src: test.txt
+    dest: /home/vstevanic/Desktop/test.txt
+    mode: 0755
+    #da bi kopirao na local morads da pristupas kao root ( sudo su )
