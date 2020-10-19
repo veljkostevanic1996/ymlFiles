@@ -1,0 +1,6 @@
+#ovde mogu da se stavljaju promenljiva samo za ovaj server
+#postoji i za grupe ali mora da se zove direktorijum
+# group_vars pa u njemu nazivgrupe.yml file
+---
+
+service: httpd
