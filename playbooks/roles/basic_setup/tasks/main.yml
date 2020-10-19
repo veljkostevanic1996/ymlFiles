@@ -3,6 +3,16 @@
 - name: copy local file to remote(local) server
   copy:
     src: test.txt
-    dest: /home/vstevanic/Desktop/test.txt
+    dest: /home/veljkostevanic/Desktop/test.txt
     mode: 0755
     #da bi kopirao na local morads da pristupas kao root ( sudo su )
+
+- name: sleep
+  wait_for:
+    timeout: 10
+  notify: createFolder # pokrece neki task
+
+- name: createFolder
+  file:
+    path: "/home/veljkostevanic/Desktop/{{folder_name}}"
+    state: directory

@@ -1,8 +1,21 @@
 ---
 
-- hosts: localhost
+- hosts: server1
   gather_facts: no
   become: yes
 
   roles:
     - basic_setup
+
+  vars_prompt:
+
+    - name: folder_name
+      prompt: "Please enter folder name"
+      private: no
+
+  tasks:
+
+    - name: Wait for folder to be created
+      wait_for:
+        path: /home/veljkostevanic/Desktop/{{folder_name}}
+        #delay: 10 # 10s odlaze pokretanje taska

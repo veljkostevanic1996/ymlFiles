@@ -1,6 +1,6 @@
 ---
 
-- hosts: localhost
+- hosts: server1
   become: yes # ovo znaci da radi kao root user (shell ->  sudo su)
   gather_facts: no
 
@@ -8,6 +8,10 @@
   # mogu samo da imaju - name...
 
   vars_prompt:
+
+    - name: folder_name
+      prompt: "Please enter folder name"
+      private: no
 
     - name: username
       prompt: "Please enter your username"
@@ -17,6 +21,12 @@
       prompt: "Please enter your password"
       private: yes
       confirm: yes
+
+  pre_tasks:
+    - name: "Create folder"
+      file:
+        path: "/home/veljkostevanic/Desktop/{{folder_name}}"
+        state: directory
 
   tasks:
 
@@ -36,7 +46,7 @@
 
     - name: Wait for folder to be created
       wait_for:
-        path: /home/vstevanic/Desktop/proba
+        path: /home/veljkostevanic/Desktop/{{folder_name}}
         # putanja gde hocemo da nam kreira nov direktorijum a posledni /newDirectory je naziv novog direktorijuma
 
     - include: include1.yml folderName='newFolder'
