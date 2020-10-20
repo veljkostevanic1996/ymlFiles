@@ -10,7 +10,23 @@
       npm:
         path: Node
 
-    - name: Create docker image from docker file
+  #  - name: Stop a container
+  #   docker_container:
+  #     name: node_app
+  #     state: stopped
+
+    - name: Prune everything
+      docker_prune:
+        containers: yes
+        images: yes
+        networks: yes
+        volumes: yes
+        builder_cache: yes
+        containers_filters:
+          until: 2h
+
+
+    - name: Present
       docker_image:
         build:
           path: Node
@@ -18,10 +34,11 @@
         name: node_web_app
         state: present
 
-    - name: Run conteiner
+    - name: Started
       docker_container:
         image: node_web_app
         name: node_app
         state: started
+        restart: yes
         ports:
           - "8888:8080"
