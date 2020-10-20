@@ -1,0 +1,27 @@
+---
+
+- hosts: localhost
+  connection: local
+  gather_facts: no
+
+  tasks:
+
+    - name: install npm packages
+      npm:
+        path: Node
+
+    - name: Create docker image from docker file
+      docker_image:
+        build:
+          path: Node
+          pull: yes
+        name: node_web_app
+        state: present
+
+    - name: Run conteiner
+      docker_container:
+        image: node_web_app
+        name: node_app
+        state: started
+        ports:
+          - "8888:8080"
