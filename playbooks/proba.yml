@@ -1,7 +1,7 @@
 ---
 
-- hosts: 192.168.190.130
-  #gather_facts: no
+- hosts: server1
+  gather_facts: no
 
   tasks:
 
