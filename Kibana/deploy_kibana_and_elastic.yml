@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  connection: local
+  become: yes
+  vars:
+    kibana_url: 'localhost:5601'
+
+  roles:
+    - metricbeat
+    - elasticsearch
+    - kibana

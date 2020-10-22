@@ -1,0 +1,38 @@
+---
+
+- name: Install Kibana
+  apt:
+    name: kibana
+    update_cache: yes
+
+- name: Configure Kibana
+  lineinfile:
+    destfile: /etc/kibana/kibana.yml
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  with_items:
+    - {regexp: 'server.host', line: 'server.host: 0.0.0.0'}
+    - {regexp: 'server.port', line: 'server.port: 5601'}
+    - {regexp: 'elasticsearch.url:', line: 'elasticsearch.url: "http://localhost:9200"'}
+
+- name: Start Kibana
+  service:
+    name: kibana
+    state: started
+
+- name: Wait for Kibana to load
+  wait_for:
+    host: 0.0.0.0
+    port: 5601
+    delay: 10
+    state: present
+
+- name: "Import kibana"
+  uri:
+    url: "http://{{ kibana_url }}/api/kibana/dashboards/import"
+    method: POST
+    body_format: "json"
+    body: "{{ lookup('file', 'dashboard.json') }}"
+    headers:
+      Content-Type: "application/json"
+      Kbn-xsrf: "kibana"
