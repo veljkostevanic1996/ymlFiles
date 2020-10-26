@@ -13,5 +13,13 @@ pipeline{
                 credentialsId: '1'
             }
         }
+
+        stage('add permisions'){
+
+            steps{
+
+                sh 'sudo chmod -R 777 /home/vstevanic/Desktop/ymlFilesCopy/'
+            }
+        }
     }
 }
