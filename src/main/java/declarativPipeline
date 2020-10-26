@@ -1,0 +1,17 @@
+pipeline{
+
+    agent any
+
+    stages{
+
+        stage('clone'){
+
+            steps{
+
+                git branch: 'master'
+                url: 'https://github.com/brki18/devops_web_goat.git'
+                credentialsId: 'veljkostevanic1996'
+            }
+        }
+    }
+}
