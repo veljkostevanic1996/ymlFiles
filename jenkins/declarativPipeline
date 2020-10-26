@@ -8,7 +8,10 @@ pipeline{
 
             steps{
 
-                sh 'cd /home/Desktop/Test && git (branch: 'master', url: 'https://github.com/brki18/devops_web_goat.git', credentialsId: '1')'
+                sh 'cd /home/Desktop/Test && pwd'
+                git branch: 'master',
+                url: 'https://github.com/brki18/devops_web_goat.git',
+                credentialsId: '1'
             }
         }
 
