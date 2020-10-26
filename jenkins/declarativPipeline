@@ -8,10 +8,8 @@ pipeline{
 
             steps{
 
-                sh 'cd /home/vstevanic/Desktop/Test && pwd'
-                git branch: 'master',
-                url: 'https://github.com/brki18/devops_web_goat.git',
-                credentialsId: '1'
+                sh 'cd /home/vstevanic/Desktop/Test && git clone https://veljkostevanic1996:Veljkostevanic123@github.com/brki18/devops_web_goat.git'
+
             }
         }
 
