@@ -8,8 +8,8 @@ pipeline{
             steps {
                 checkout([$class: 'GitSCM',
                     branches: [[name: '*/master']],
-                    extensions: [[$class: '/home/vstevanic/Desktop/Test',
-                                relativeTargetDir: 'checkout-directory']],
+                    extensions: [[$class: 'RelativeTargetDirectory',
+                                relativeTargetDir: '/home/vstevanic/Desktop/Test']],
                     userRemoteConfigs: [[credentialsId: '1',
                         url: 'https://github.com/brki18/devops_web_goat.git']]])
             }
