@@ -3,7 +3,7 @@ pipeline{
     agent any
 
     stages{
-
+        /*
         stage('clone'){
 
             steps{
@@ -15,6 +15,15 @@ pipeline{
                         branches: [name: '*/master']
                     ])
                 }
+            }
+        }
+        */
+        stage('Checkout') {
+            steps {
+                checkout([$class: 'GitSCM',
+                    branches: [name: '*/master'],
+                    userRemoteConfigs: [[credentialsId: '1',
+                        url: 'https://github.com/brki18/devops_web_goat.git']]])
             }
         }
 
