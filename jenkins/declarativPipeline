@@ -19,7 +19,7 @@ pipeline{
 
             steps{
 
-                sh 'sudo chmod -R 777 /home/vstevanic/Desktop/web-goat-copy/'
+                sh 'sudo chmod -R 777 /home/vstevanic/Desktop/Test/'
             }
         }
     }
