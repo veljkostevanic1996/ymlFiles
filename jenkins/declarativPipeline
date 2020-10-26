@@ -7,7 +7,7 @@ pipeline{
         stage('Checkout') {
             steps {
                 checkout([$class: 'GitSCM',
-                    branches: [name: '*/master'],
+                    branches: [[name: '*/master']],
                     userRemoteConfigs: [[credentialsId: '1',
                         url: 'https://github.com/brki18/devops_web_goat.git']]])
             }
