@@ -3,21 +3,7 @@ pipeline{
     agent any
 
     stages{
-        /*
-        stage('clone'){
 
-            steps{
-                script{
-                //sh 'cd /home/vstevanic/Desktop/Test && git clone https://veljkostevanic1996:Veljkostevanic123@github.com/brki18/devops_web_goat.git'
-                     checkout scm: ([
-                        $class: 'GitSCM',
-                        userRemoteConfigs: [credentialsId: '1', url: 'https://github.com/brki18/devops_web_goat.git'],
-                        branches: [name: '*/master']
-                    ])
-                }
-            }
-        }
-        */
         stage('Checkout') {
             steps {
                 checkout([$class: 'GitSCM',
