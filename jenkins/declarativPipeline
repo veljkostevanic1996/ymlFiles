@@ -4,14 +4,12 @@ pipeline{
 
     stages{
 
-
-
         stage('build docker images with maven'){
 
             steps{
                 withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'PASSWORD_VAR', usernameVariable: 'USERNAME_VAR')])
                     {
-                        sh 'mvn clean install -Dusername=${USERNAME_VAR} -Dpassword=${PASSWORD_VAR}'
+                        sh 'mvn clean deploy -Dusername=${USERNAME_VAR} -Dpassword=${PASSWORD_VAR}'
                     }
             }
         }
