@@ -3,7 +3,7 @@ pipeline{
     agent any
 
     stages{
-
+        /*
         stage('Checkout') {
             steps {
                 checkout([$class: 'GitSCM',
@@ -22,6 +22,15 @@ pipeline{
                 sh 'sudo chmod -R 777 /home/vstevanic/Desktop/Test/'
             }
         }
+        */
+        stage('build docker images with maven'){
 
+            steps{
+                withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'PASSWORD_VAR', usernameVariable: 'USERNAME_VAR')])
+                    {
+                        sh 'mvn clean install -Dusername=${USERNAME_VAR} -Dpassword=${PASSWORD_VAR}'
+                    }
+            }
+        }
     }
 }
