@@ -9,7 +9,7 @@ pipeline{
             steps{
                 withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'PASSWORD_VAR', usernameVariable: 'USERNAME_VAR')])
                     {
-                        sh 'mvn clean deploy -Dusername=${USERNAME_VAR} -Dpassword=${PASSWORD_VAR}'
+                        sh 'mvn deploy:push -Dusername=${USERNAME_VAR} -Dpassword=${PASSWORD_VAR}'
                     }
             }
         }
