@@ -1,0 +1,26 @@
+---
+
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  become: yes
+
+  tasks:
+
+    - name: Present
+      docker_image:
+        build:
+          path: '/home/vstevanic/Desktop/Test/docker/'
+          pull: yes
+        name: web_goat
+        source: build
+        state: present
+
+    - name: Started
+      docker_container:
+        image: web_goat
+        name: web_goat_container
+        state: started
+        restart: yes
+        ports:
+          - "8888:8080"
